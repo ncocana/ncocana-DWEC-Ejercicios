@@ -31,14 +31,27 @@ function play() {
     let resultDadoParchis = tirarDadoParchis();
     let resultDadoDnd = tirarDadoDnd();
 
+    document.getElementById("outputDiv").innerHTML = "<table>" +
+            "<tr>" +
+                "<td>Dado Cruz o Cara</td>" +
+                "<td>Dado Parchis</td>" +
+                "<td>Dado DnD</td>" +
+            "</tr>" +
+            "<tr>" +
+                '<td id="resultDadoCaraCruz"></td>' +
+                '<td id="resultDadoParchis"></td>' +
+                '<td id="resultDadoDnd"></td>' +
+            "</tr>" +
+        "</table>" + 
+        '<p id="outputText"></p>';
     document.getElementById("resultDadoCaraCruz").innerHTML = resultDadoCaraCruz;
     document.getElementById("resultDadoParchis").innerHTML = resultDadoParchis;
     document.getElementById("resultDadoDnd").innerHTML = resultDadoDnd;
 
     if (resultDadoCaraCruz === WINNER_NUMBER || resultDadoParchis === WINNER_NUMBER || resultDadoDnd === WINNER_NUMBER) {
-        document.getElementById("output").innerHTML = "¡Enhorabuena! Has ganado.";
+        document.getElementById("outputText").innerHTML = "¡Enhorabuena! Has ganado.";
     } else {
-        document.getElementById("output").innerHTML = "Oh no... Has perdido.";
+        document.getElementById("outputText").innerHTML = "Oh no... Has perdido.";
     }
 }
 
