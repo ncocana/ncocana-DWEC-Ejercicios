@@ -3,7 +3,7 @@ const MAX_NUMBER = 2;
 var output;
 
 function play() {
-    output = Math.floor(Math.random() * (MAX_NUMBER - MIN_NUMBER + 1) + MIN_NUMBER)
+    output = Math.floor(Math.random() * (MAX_NUMBER - MIN_NUMBER + 1) + MIN_NUMBER);
 
     var img = document.createElement("img");
     var src = document.getElementById("image");
