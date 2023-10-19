@@ -5,31 +5,17 @@ function Dice(numCaras) {
     this.numCaras = numCaras;
 }
 
-function tirarDadoCaraCruz() {
-    let dadoCaraCruz = new Dice(2);
-    let resultDadoCaraCruz = Math.floor(Math.random() * (dadoCaraCruz.numCaras - MIN_NUMBER + 1) + MIN_NUMBER);
+function tirarDado(number) {
+    let dado = new Dice(number);
+    let resultDado = Math.floor(Math.random() * (dado.numCaras - MIN_NUMBER + 1) + MIN_NUMBER);
 
-    return resultDadoCaraCruz;
-}
-
-function tirarDadoParchis() {
-    let dadoParchis = new Dice(6);
-    let resultDadoParchis = Math.floor(Math.random() * (dadoParchis.numCaras - MIN_NUMBER + 1) + MIN_NUMBER);
-
-    return resultDadoParchis;
-}
-
-function tirarDadoDnd() {
-    let dadoDnd = new Dice(12);
-    let resultDadoDnd = Math.floor(Math.random() * (dadoDnd.numCaras - MIN_NUMBER + 1) + MIN_NUMBER);
-
-    return resultDadoDnd;
+    return resultDado;
 }
 
 function play() {
-    let resultDadoCaraCruz = tirarDadoCaraCruz();
-    let resultDadoParchis = tirarDadoParchis();
-    let resultDadoDnd = tirarDadoDnd();
+    let resultDadoCaraCruz = tirarDado(2);
+    let resultDadoParchis = tirarDado(6);
+    let resultDadoDnd = tirarDado(12);
 
     document.getElementById("outputDiv").innerHTML = "<table>" +
             "<tr>" +
