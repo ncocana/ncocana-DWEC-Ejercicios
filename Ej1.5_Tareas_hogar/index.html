@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Tareas del hogar</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <link rel="stylesheet" href="./styles.css">
+        <script src="./script.js"></script>
+    </head>
+    <body>
+        <h1 class="center">Tareas del hogar</h1>
+        <div class="center">
+            <label for="family">Elige una familia:</label>
+            <select name="family" id="family">
+                <option value="" selected disabled hidden>Elige aquí</option>
+                <option value="familySastre">Familia Sastre</option>
+                <option value="familyTorrens">Familia Torrens</option>
+                <option value="familyMoll">Familia Moll</option>
+            </select>
+            <button onclick="printTable()">Elegir</button>
+        </div>
+        <br>
+        <div id="outputDiv"></div>
+    </body>
+</html>
