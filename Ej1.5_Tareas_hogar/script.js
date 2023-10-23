@@ -29,49 +29,53 @@ function printTable() {
 
     // Retrieves the selected family value from the select menu inside the function.
     familySelected = document.getElementById("family").value;
+    if (familySelected != "") {
 
-    // Checks which family is selected and uses the corresponding family object.
-    if (familySelected === "familySastre") {
-        family = familySastre;
-    } else if (familySelected === "familyTorrens") {
-        family = familyTorrens;
-    } else if (familySelected === "familyMoll") {
-        family = familyMoll;
-    }
-
-    // Starts to form the table structure.
-    let table;
-
-    table = "<table class='center'>" +
-        "<tr>" +
-        "<th>Semana</th>";
-
-    // Prints the headers for the tasks values.
-    for (var i = 0; i < family.numTasks; i++) {
-        table += printTasks(i);
-    }
-
-    table += "</tr>";
-
-    // Prints the content of the table. First the week numbers, then the family members.
-    for (var i = 1; i <= family.numWeeks; i++) {
-        table += '<tr>';
-        table += printWeeks(i);
-        // console.log("semana " + i);
-
-        for (var j = 0; j < family.numTasks; j++) {
-            let index = (i - 1 + j) % family.numMembers;
-            table += printMembers(index);
-            // console.log("tarea " + j + " de " + family.numTasks + ". miembro " + index);
+        // Checks which family is selected and uses the corresponding family object.
+        if (familySelected === "familySastre") {
+            family = familySastre;
+        } else if (familySelected === "familyTorrens") {
+            family = familyTorrens;
+        } else if (familySelected === "familyMoll") {
+            family = familyMoll;
         }
 
-        table += '</tr>';
+        // Starts to form the table structure.
+        let table;
+
+        table = "<table class='center'>" +
+            "<tr>" +
+            "<th>Semana</th>";
+
+        // Prints the headers for the tasks values.
+        for (var i = 0; i < family.numTasks; i++) {
+            table += printTasks(i);
+        }
+
+        table += "</tr>";
+
+        // Prints the content of the table. First the week numbers, then the family members.
+        for (var i = 1; i <= family.numWeeks; i++) {
+            table += '<tr>';
+            table += printWeeks(i);
+            // console.log("semana " + i);
+
+            for (var j = 0; j < family.numTasks; j++) {
+                let index = (i - 1 + j) % family.numMembers;
+                table += printMembers(index);
+                // console.log("tarea " + j + " de " + family.numTasks + ". miembro " + index);
+            }
+
+            table += '</tr>';
+        }
+
+        table += "</table>";
+
+        // Inserts all the table in the div.
+        document.getElementById("outputDiv").innerHTML = table;
+    } else {
+        document.getElementById("outputDiv").innerHTML = "<p class='warning'>¡Elige una familia!</p>";
     }
-
-    table += "</table>";
-
-    // Inserts all the table in the div.
-    document.getElementById("outputDiv").innerHTML = table;
 }
 
 function printTasks(index) {
