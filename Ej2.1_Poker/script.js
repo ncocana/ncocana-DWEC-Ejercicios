@@ -13,6 +13,7 @@ const CARDS = [
     'queen_of_diamonds', 'queen_of_hearts', 'queen_of_spades', 'queen_of_clubs',
     'king_of_diamonds', 'king_of_hearts', 'king_of_spades', 'king_of_clubs'
 ];
+let myWindow;
 
 // Swaps each card with a random card in the deck.
 function shuffleDeck(deck) {
@@ -54,13 +55,7 @@ function checkOnePair(hand, document) {
     }
 
     for (let value in countsValues) {
-        if (countsValues[value] === 4) {
-            document.getElementById('result').textContent = '¡Tienes un Poker! ¡Has ganado!';
-            return;
-        } else if (countsValues[value] === 3) {
-            document.getElementById('result').textContent = '¡Tienes un Trio! ¡Has ganado!';
-            return;
-        } else if (countsValues[value] === 2) {
+        if (countsValues[value] === 2) {
             document.getElementById('result').textContent = '¡Tienes una Pareja! ¡Has ganado!';
             return;
         }
@@ -69,17 +64,27 @@ function checkOnePair(hand, document) {
     document.getElementById('result').textContent = 'No hay ninguna mano ganadora... Intentalo de nuevo.';
 }
 
-function openWindow() {
-    // myWindow.document.write('<div id="result"></div>');
-    return myWindow;
+function play(document = window.document) {
+    let hand = shuffleDeck(CARDS).slice(0, 5);
+    showHand(hand, document);
+    checkOnePair(hand, document);
 }
 
-function play() {
-    let myWindow = window.open("solution.html", "", "width=800,height=300");
+function openWindow() {
+    myWindow = window.open("solution.html", "", "width=800,height=300");
 
     myWindow.onload = function () {
-        let hand = shuffleDeck(CARDS).slice(0, 5);
-        showHand(hand, myWindow.document);
-        checkOnePair(hand, myWindow.document);
+        play(myWindow.document);
     };
+}
+
+function closeEmergentWindow() {
+    if (myWindow !== undefined) {
+        myWindow.close();
+    }
+}
+
+// Does not work due to security restrictions on the browser, unless there's no historial.
+function closePrincipalWindow() {
+    window.close();
 }

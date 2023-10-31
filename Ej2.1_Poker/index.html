@@ -9,8 +9,11 @@
     </head>
     <body>
         <h1>Poker</h1>
-        <p>Ganas si sacas una Pareja, un Trio, o un Poker.</p>
-        <button onclick="play()">Play</button>
+        <p>Ganas si sacas una Pareja.</p>
+        <button onclick="openWindow()">Jugar</button>
+        <button onclick="closeEmergentWindow()">Cerrar ventana emergente</button>
+        <!-- Does not work due to security restrictions on the browser, unless there's no historial. -->
+        <button onclick="closePrincipalWindow()">Cerrar ventana principal</button>
         <!-- <div id="hand">
             <div class="card"></div>
             <div class="card"></div>
