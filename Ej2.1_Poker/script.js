@@ -13,6 +13,7 @@ const CARDS = [
     'queen_of_diamonds', 'queen_of_hearts', 'queen_of_spades', 'queen_of_clubs',
     'king_of_diamonds', 'king_of_hearts', 'king_of_spades', 'king_of_clubs'
 ];
+let remainingCards = CARDS.slice();
 let myWindow;
 
 // Swaps each card with a random card in the deck.
@@ -30,8 +31,10 @@ function showHand(hand, document) {
     for (let i = 0; i < cardElements.length; i++) {
         let img = document.createElement("img");
         cardElements[i].innerHTML = "";
-        img.src = "./img/" + hand[i] + ".png";
-        cardElements[i].appendChild(img);
+        if (hand[i] != undefined) {
+            img.src = "./img/" + hand[i] + ".png";
+            cardElements[i].appendChild(img);
+        }
         // console.log(i + " - " + hand[i] + " - " + cardElements[i].innerHTML);
     }
 }
@@ -65,9 +68,22 @@ function checkOnePair(hand, document) {
 }
 
 function play(document = window.document) {
-    let hand = shuffleDeck(CARDS).slice(0, 5);
+    if (remainingCards.length === 0) {
+        document.getElementById('result').textContent = '¡No quedan más cartas en la baraja!';
+        return;
+    }
+
+    let hand = shuffleDeck(remainingCards).slice(0, 5);
     showHand(hand, document);
     checkOnePair(hand, document);
+
+    // Remove the drawn cards from the remainingCards array
+    for (let card of hand) {
+        let index = remainingCards.indexOf(card);
+        if (index !== -1) {
+            remainingCards.splice(index, 1);
+        }
+    }
 }
 
 function openWindow() {
