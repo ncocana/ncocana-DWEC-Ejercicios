@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Clinica Veterinario Moll | Formulario</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <link rel="stylesheet" href="../css/styles.css">
+    </head>
+    <body>
+        <h1>Clinica Veterinario Moll</h1>
+
+        <label for="name">Nombre:</label>
+        <input type="text" name="name" id="name"/>
+        <br>
+        <label>Sexo:</label>
+        <input type="radio" name="sexo" value="M" id="M"/>
+        <label for="M">M</label>
+        <input type="radio" name="sexo" value="F" id="F"/>
+        <label for="M">F</label>
+        <br>
+        <label for="registryNumber">Número de registro:</label>
+        <input type="text" name="registryNumber" id="registryNumber"/>
+        <br>
+        <label for="type">Tipo:</label>
+        <input type="text" name="type" id="type"/>
+
+        <br><br>
+        <a href='animals.html'><button>Volver atras</button></a>
+
+        <div id="outputDiv"></div>
+        <script type="module">
+            import {getAnimal} from "../service/AnimalService.js";
+
+            function fillOutForm(animal) {
+                document.getElementById("name").value = animal.name;
+                // if (animal.sex === "F") {
+                //     document.getElementById("F").checked = true;
+                // } else if (animal.sex === "M") {
+                //     document.getElementById("M").checked = true;
+                // }
+                document.querySelector("input[name='sexo'][value='"+animal.sex+"']").checked = true;
+                document.getElementById("registryNumber").value = (animal.registryNumber === null? "Sin número" : animal.registryNumber);
+                document.getElementById("type").value = animal.type;
+            }
+
+            function init() {
+                // Get the current URL.
+                const currentURL = window.location.href;
+
+                // Parse the URL to get the query parameters.
+                const urlParams = new URL(currentURL);
+
+                // Get the value of idAnimal from the URL.
+                const idAnimal = urlParams.searchParams.get('idAnimal');
+                
+                if (idAnimal) {
+                    // console.log(idAnimal);
+                    const animal = getAnimal(parseInt(idAnimal));
+                    fillOutForm(animal);
+                }
+            }
+
+            window.addEventListener("load", init);
+        </script>
+    </body>
+</html>

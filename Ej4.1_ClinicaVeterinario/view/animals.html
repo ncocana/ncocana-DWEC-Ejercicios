@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Clinica Veterinario Moll | Home</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <link rel="stylesheet" href="../css/styles.css">
+    </head>
+    <body>
+        <h1>Clinica Veterinario Moll</h1>
+        <div id="outputDiv"></div>
+        <script type="module">
+            import {getAnimals} from "../service/AnimalService.js";
+
+            function print(animals) {
+                let table = "<table>" +
+                                "<tr>" +
+                                    "<th>Nombre</th>" +
+                                    "<th>Sexo</th>" +
+                                    "<th>Número de registro</th>" +
+                                    "<th>Tipo</th>" +
+                                    "<th>Ficha</th>" +
+                                "</tr>";
+                // console.log(animals);
+                for(let animal of animals){
+                    table += "<tr>" +
+                                "<td>" +
+                                    animal.name + 
+                                "</td>" +
+                                "<td>" +
+                                    animal.sex + 
+                                "</td>" +
+                                "<td>" +
+                                    (animal.registryNumber === null? "Sin número" : animal.registryNumber) + 
+                                "</td>" +
+                                "<td>" +
+                                    animal.type + 
+                                "</td>" +
+                                "<td>" +
+                                    "<form action='animalForm.html' method='GET' id='formAnimal" + animal.id + "'>" +
+                                        "<input id='idAnimal' type='number' name='idAnimal' value='" + animal.id + "' hidden>"+
+                                    "</form>" + 
+                                    "<button id='submitButton' type='submit' value='Ver ficha' form='formAnimal" + animal.id + "'>Ver ficha</button>" +
+                                    // "<a href='animalForm.html?idAnimal=" + animal.id + "'><button>Ver ficha</button></a>" +
+                                "</td>" +
+                            "</tr>";
+                }
+                table += "</table>";
+                document.getElementById("outputDiv").innerHTML = table;
+            }
+
+            function init() {
+                const animals = getAnimals();
+                print(animals);
+            }
+
+            window.addEventListener("load", init);
+        </script>
+    </body>
+</html>
