@@ -4,6 +4,6 @@
 # Other files
 *.rar
 *.zip
-Apuntes/
-Ej*.0*
+# Apuntes/
+# Ej*.0*
 *_other.*

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>IIFE</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <!-- <link rel="stylesheet" href="/styles.css"> -->
+        <!-- <script src="./mates.js"></script>
+        <script src="./matesBinaria.js"></script> -->
+        <!-- <link rel="icon" type="image/png" href="/img/coffee.png"> -->
+    </head>
+    <body>
+        <script>
+            /*
+                Immediately Invoked Function Expressions (IIFE)
+                También conocidas como funciones auto-invoke.
+            */
+
+            // window.addEventListener("load", init);
+            // Instead:
+            (function(){
+                // Todo esto se ejecutará al cargar la página.
+                init();
+            })()
+
+            /*
+                Ventajas:
+                    - Permite resolver funciones async. Funcionan con promises.
+                        promises - se hace un async await (ES8)
+            */
+        </script>
+    </body>
+</html>

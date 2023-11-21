@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Imports, Exports, y Módulos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <!-- <link rel="stylesheet" href="/styles.css"> -->
+        <!-- <script src="./mates.js"></script>
+        <script src="./matesBinaria.js"></script> -->
+        <!-- <link rel="icon" type="image/png" href="/img/coffee.png"> -->
+    </head>
+    <body>
+        <p>Esto es una página de matemáticas.</p>
+        <button onclick="printMe()">Click me</button>
+        <button onclick="alert()">Alert</button>
+        <button id="buttonGood">Botón bueno</button>
+        <script type="module">
+            import {suma, multiplicar, DOSPI} from "./mates.js";
+            import {sumaBin, multiplicar as multiBin} from "./matesBinaria.js";
+            // import * as matesBin from "./matesBinaria.js";
+
+            // Suma de dos numeros.
+            console.log(suma(4, 7));
+
+            // Multiplicación de dos numeros.
+            console.log(multiplicar(4, 7));
+
+            // Suma binaria de dos numeros.
+            console.log(sumaBin(4, 7));
+            // console.log(matesBin.sumaBin(4, 7));
+
+            // Multiplicación binaria de dos numeros.
+            console.log(multiBin(4, 7));
+            // console.log(matesBin.multiplicar(4, 7));
+
+            console.log(DOSPI);
+
+            /*
+                ¿Qué es un módulo de JS?
+                Un archivo que exporta explicitamente items de JS.
+                (variables, funciones, clases, etc)
+
+                ¿Cómo se carga un módulo de JS? Con un import.
+                - Podemos definir explicitamente que partes queremos cargar haciendo uso de DESTRUCTING.
+                    {a, b, c, d, ...}
+                - Si no se define qué propiedad cargar, se carga default.
+                - En caso de ambiguedad, admiten alias.
+
+                Para que un import funcione es necesario declarar el script como módulo.
+
+                IMPORTANTE. El DOM no tiene visibilidad en los módulos.
+            */
+
+            function printMe() {
+                console.log("Hello World");
+            }
+
+            // SOLUCIÓN
+            // Chapuza
+            window.printMe = printMe;
+            window.alert = printMe;
+
+            // Solución correcta.
+            document.querySelector("#buttonGood").addEventListener("click", printMe);
+        </script>
+    </body>
+</html>

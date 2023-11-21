@@ -1,0 +1,33 @@
+.max-size {
+    max-width: 300px;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+body {
+    background-color: rgb(254, 255, 223);
+    font-family: Helvetica;
+}
+
+.box {
+    margin: auto;
+    width: 50%;
+    border: 3px solid rgba(168, 132, 25, 0.584);
+    border-radius: 5%;
+    padding: 50px 10px;
+    background-color: rgba(255, 255, 255, 0.827);
+    box-shadow: 0 0 10px rgba(60, 60, 60, 0.668);
+}
+
+.colorBlue {
+    color: blue;
+}
