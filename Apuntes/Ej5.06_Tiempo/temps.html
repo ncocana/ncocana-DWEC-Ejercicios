@@ -12,23 +12,29 @@
 
 
         /******************************************/
-        var x = setInterval(() => {
-            console.log('hello');
-        }, 1000); //2000
-        setTimeout(() => {
-            clearInterval(x);
-        }, 5000); //6000 
+        // var x = setInterval(() => {
+        //     console.log('hello');
+        // }, 1000); //2000
+        // setTimeout(() => {
+        //     clearInterval(x);
+        // }, 5000); //6000
+
+        // Prints every 1 second 'hello' in console. Also after 5 seconds, it clears the interval.
+        // Prints 'hello' 5 times.
 
         /******************************************/
-        let i = 0;
-        function incremento() {
-            i++;
-            console.log(i);
-        }
-        const incrementoTimer = setInterval(incremento, 2000);
-        setInterval(() => {
-            clearInterval(incrementoTimer);
-        }, 6000)
+        // let i = 0;
+        // function incremento() {
+        //     i++;
+        //     console.log(i);
+        // }
+        // const incrementoTimer = setInterval(incremento, 2000);
+        // setInterval(() => {
+        //     clearInterval(incrementoTimer);
+        // }, 6000)
+
+        // Prints 'i' every 2 seconds in console. Also after 6 seconds, it clears the interval.
+        // Prints '1', '2', and '3'.
         
         /******************************************/
         var x = setInterval(() => {
@@ -42,54 +48,63 @@
             }, 3000);
         }, 7000);
 
-        /******************************************/
-        var j=0;
-        function examen(){
-            setTimeout(() => {
-                if(i<3){
-                    examen2();
-                }
-            }, 2000); //2000 veces 3: 3s 6s 9s
-        }
-        function examen2(){
-            setTimeout(() => {
-                console.log("hello")
-                i++;
-                examen();
-            }, 1000);
-        }
-        examen();
+        // After every 11 seconds, prints 'hello' in console. But because 'z' also has three clearInterval() for each interval, 'hello' only it's printed once before all the intervals are deleted.
 
         /******************************************/
-        var x=0;
-        function greeting() {
-            console.log('Hello');            
-        }
-        while (x===0){
-            setTimeout(greeting, 3000);
-            x = 1;
-        }
+        // var j=0;
+        // function examen(){
+        //     setTimeout(() => {
+        //         if(j<3){
+        //             examen2();
+        //         }
+        //     }, 2000); //2000 veces 3: 3s 6s 9s
+        // }
+        // function examen2(){
+        //     setTimeout(() => {
+        //         console.log("hello")
+        //         j++;
+        //         examen();
+        //     }, 1000);
+        // }
+        // examen();
+
+        // Prints 'hello' 3 times in console, until 'j' is equal or major than 3, which happens after examen() is executed 3 times.
 
         /******************************************/
-        let k = 0;
-        function incremento() {
-            i++;
-            console.log(i);
-        }
-        setInterval(incremento, 2000);
+        // var x=0;
+        // function greeting() {
+        //     console.log('Hello');            
+        // }
+        // while (x===0){
+        //     setTimeout(greeting, 3000);
+        //     x = 1;
+        // }
+
+        // Prints 'Hello' while 'x' is equal to '0'. After being executed one time, it stops working as 'x' now is equal to '1'.
+        // Prints 'Hello' 1 time after 3 seconds.
 
         /******************************************/
-        let l = 0;
-        function increment() {
-            i++;
-            console.log(i);
-        }
-        let timer = setTimeout(function myTimer() {
-            increment();
-            timer = setTimeout(myTimer, 1000);
-        }, 1000);
+        // let k = 0;
+        // function incremento() {
+        //     k++;
+        //     console.log(k);
+        // }
+        // setInterval(incremento, 2000);
 
+        // Increments 'k' value by 1 and prints it in console after 2 seconds infinetely.
 
+        /******************************************/
+        // let l = 0;
+        // function increment() {
+        //     l++;
+        //     console.log(l);
+        // }
+        // let timer = setTimeout(function myTimer() {
+        //     increment();
+        //     timer = setTimeout(myTimer, 1000);
+        // }, 1000);
+
+        // Enters in an infinite loop, printing the value of 'l' (increased by 1 each time the functione executes) infinetely once the variable is setted due to the function myTimer() of the setTimeout() being called again inside its own function, provoking an infinite loop of myTimer() being called again and again.
 
 
         /*
