@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Usuarios MVC</title>
+        <meta charst="UTF-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <link rel="stylesheet" href="../css/styles.css">
+    </head>
+    <body>
+        <h1 class="center">Usuarios</h1>
+    </body>
+    <script type="module">
+        import { getUsers } from "../controller/UserController.js";
+
+        async function showTable() {
+            var body = document.querySelector("body");
+
+            // Table
+            var table = document.createElement("table");
+
+            // Header
+            var trHeader = document.createElement("tr");
+            table.appendChild(trHeader);
+
+            var thIdUser = document.createElement("th");
+            thIdUser.innerHTML = "ID User";
+            var thUsername = document.createElement("th");
+            thUsername.innerHTML = "Username";
+            var thName = document.createElement("th");
+            thName.innerHTML = "Name";
+            var thSurname = document.createElement("th");
+            thSurname.innerHTML = "Surname";
+
+            trHeader.appendChild(thIdUser);
+            trHeader.appendChild(thUsername);
+            trHeader.appendChild(thName);
+            trHeader.appendChild(thSurname);
+
+            let users = await getUsers();
+
+            for (const user of users) {
+                var trContent = document.createElement("tr");
+                
+                var tdIdUser= document.createElement("td");
+                tdIdUser.innerHTML = user.iduser;
+                var tdUsername = document.createElement("td");
+                tdUsername.innerHTML = user.username;
+                var tdName = document.createElement("td");
+                tdName.innerHTML = user.name;
+                var tdSurname = document.createElement("td");
+                tdSurname.innerHTML = user.surname;
+
+                trContent.appendChild(tdIdUser);
+                trContent.appendChild(tdUsername);
+                trContent.appendChild(tdName);
+                trContent.appendChild(tdSurname);
+
+                table.appendChild(trContent);
+                console.log(user.username);
+            }
+
+            table.className = "center";
+            body.appendChild(table);
+        }
+
+        // showTable();
+        window.addEventListener("load", showTable);
+    </script>
+</html>
