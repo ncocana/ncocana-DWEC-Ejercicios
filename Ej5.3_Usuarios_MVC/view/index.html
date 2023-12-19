@@ -30,15 +30,19 @@
             thName.innerHTML = "Name";
             var thSurname = document.createElement("th");
             thSurname.innerHTML = "Surname";
+            var thTransport = document.createElement("th");
+            thTransport.innerHTML = "Transport";
 
             trHeader.appendChild(thIdUser);
             trHeader.appendChild(thUsername);
             trHeader.appendChild(thName);
             trHeader.appendChild(thSurname);
+            trHeader.appendChild(thTransport);
 
             let users = await getUsers();
+            console.log(users);
 
-            for (const user of users) {
+            for (let user of users) {
                 var trContent = document.createElement("tr");
                 
                 var tdIdUser= document.createElement("td");
@@ -49,21 +53,23 @@
                 tdName.innerHTML = user.name;
                 var tdSurname = document.createElement("td");
                 tdSurname.innerHTML = user.surname;
+                var tdTransport = document.createElement("td");
+                tdTransport.innerHTML = user.transport.nombre + "<img src='" + user.transport.url_imagen + "'>";
 
                 trContent.appendChild(tdIdUser);
                 trContent.appendChild(tdUsername);
                 trContent.appendChild(tdName);
                 trContent.appendChild(tdSurname);
+                trContent.appendChild(tdTransport);
 
                 table.appendChild(trContent);
-                console.log(user.username);
             }
 
             table.className = "center";
             body.appendChild(table);
         }
 
-        // showTable();
-        window.addEventListener("load", showTable);
+        showTable();
+        // window.addEventListener("load", showTable);
     </script>
 </html>
