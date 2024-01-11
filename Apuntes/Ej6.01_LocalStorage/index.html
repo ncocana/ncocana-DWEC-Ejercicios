@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage</title>
+</head>
+
+<body>
+    <script>
+        localStorage.setItem("name", "Noa");
+        localStorage.setItem("surname", "Cocaña");
+
+        const x = localStorage.getItem("name");
+
+        localStorage.removeItem("surname");
+
+        console.log(x);
+
+
+        function Person(name, surname) {
+            this.name = name;
+            this.surname = surname;
+        }
+
+        const acheron = new Person("Acheron", "Raiden");
+        localStorage.setItem("objetoAcheron", JSON.stringify(acheron));
+
+        const y = localStorage.getItem("objetoAcheron");
+        const y2 = JSON.parse(y);
+        console.log(y2);
+        console.log(y2.name + " " + y2.surname);
+    </script>
+</body>
+
+</html>

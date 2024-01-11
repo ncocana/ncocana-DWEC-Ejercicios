@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevas Comillas</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            Hasta ahora: '' ""
+            Nuevas comillas: ``
+
+            Ventajas:
+                - Permiten el use de '' "" dentro.
+                - Evitan concatenaciones y queda más claro el código.
+                - Permiten escribir variables sin cerrar comillas.
+                - Multilinea.
+        */
+
+        const a = "Es un string" + 
+                    "multilinea";
+        
+        const a2 = `Es un string
+                    multilinea`;
+        
+        //<a href="about.html">About</a>
+        // Comillas dobles:
+        document.querySelector("#resultado").innerHTML = "<a href='about.html'>About</a>";
+
+        // Comillas nuevas:
+        document.querySelector("#resultado").innerHTML = `<a href="about.html">'About'</a>`;
+
+        const url = "index.html";
+        const texto = "Esto es un link";
+
+        // Comillas dobles:
+        document.querySelector("#resultado").innerHTML = "<a href='" + url + "'>" + texto + "</a>";
+
+        // Comillas simples:
+        document.querySelector("#resultado").innerHTML = '<a href='+url+'>'+texto+'</a>';
+
+        // Comillas nuevas:
+        document.querySelector("#resultado").innerHTML = `<a href="${url}">${texto}</a>`;
+
+        /*
+            Desventajas:
+                - No sirve en navegadores antiguos.
+                - Complicado de tipear.
+
+
+            Ejercicio:
+                Usar clase Person
+                Cómo se crea?
+                Cómo afecta el this?
+                Cómo se crea un constructor?
+                Implementar get y set.
+                Propiedades privadas y crear métodos para acceder a ellas.
+                Declarar un método estático.
+
+                Ejemplo -> Clase Person
+                Crear Profero que heredará de Person
+        */
+    </script>
+</body>
+
+</html>
