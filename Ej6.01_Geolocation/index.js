@@ -1,8 +1,5 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoibmNvY2FuYSIsImEiOiJjbHI3eW05czkyNXhtMmtudm8yMHcyemJxIn0.TBRnMMZpfBD_bAuwr_bUFQ';
 
-// Array to store references to location markers
-let locationMarkers = [];
-
 function initMap(initialLng, initialLat) {
     const map = new mapboxgl.Map({
         container: 'map', // container ID
@@ -24,38 +21,21 @@ function initMap(initialLng, initialLat) {
             .setLngLat([location.longitude, location.latitude])
             .setPopup(new mapboxgl.Popup().setHTML(`<p>Location ${index + 1}</p>`))
             .addTo(map);
-
-        // Store reference to the marker
-        locationMarkers.push(marker);
     });
-
-    // Function to delete the first marker in locationHistory
-    function deleteFirstMarker() {
-        if (locationHistory.length > 5) {
-            // Remove the corresponding map marker
-            locationMarkers[0].remove();
-            // Remove the first item from locationHistory
-            locationHistory.shift();
-            // Save the updated history array to localStorage
-            localStorage.setItem('locationHistory', JSON.stringify(locationHistory));
-        }
-    }
 
     function updateMap(position) {
         const { longitude, latitude } = position.coords;
         map.setCenter([longitude, latitude]);
         userMarker.setLngLat([longitude, latitude]);
 
-        deleteFirstMarker()
-
         // Add the current location to the history array
         locationHistory.push({ longitude, latitude });
 
         // Keep only the last 5 locations in the history
-        // locationHistory = locationHistory.slice(-5);
+        locationHistory = locationHistory.slice(-5);
 
         // // Save the updated history array to localStorage
-        // localStorage.setItem('locationHistory', JSON.stringify(locationHistory));
+        localStorage.setItem('locationHistory', JSON.stringify(locationHistory));
 
         // Add markers for each location in locationHistory
         locationHistory.forEach((location, index) => {
