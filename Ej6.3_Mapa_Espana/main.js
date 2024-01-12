@@ -7,12 +7,12 @@ function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
 }
 
-function drop(ev, targetArea) {
+function drop(ev, areaId) {
     ev.preventDefault();
 
     var data = ev.dataTransfer.getData("text");
     var img = document.getElementById(data);
-    var area = document.getElementById(targetArea);
+    var area = document.getElementById(areaId);
 
     if (img.getAttribute("alt") == area.getAttribute("title")) {
         img.style.position = 'absolute';
