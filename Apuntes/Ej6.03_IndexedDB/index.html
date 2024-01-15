@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IndexedDB</title>
+</head>
+<body>
+    <script>
+        // Let us open our database
+        const request = window.indexedDB.open("NoaDB", 7);
+
+        // This event is only implemented in recent browsers
+        // request.onupgradeneeded = (event) => {
+            // Save the IDBDatabase interface
+            // const db = event.target.result;
+
+            // Create an objectStore for this database
+            // const objectStore = db.createObjectStore("name", { keyPath: "primaryKey" });
+        // };
+
+        // This is what our customer data looks like.
+        const customerData = [
+            { ssn: "444-44-4444", name: "Bill", age: 35, email: "bill@company.com" },
+            { ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" },
+        ];
+
+        request.onupgradeneeded = (event) => {
+            const db = event.target.result;
+
+            // Check if the object store already exists
+            if (!db.objectStoreNames.contains("customers")) {
+                // Create an objectStore to hold information about our customers.
+                const objectStore = db.createObjectStore("customers", { keyPath: "ssn" });
+
+                // Create an index to search customers by name.
+                objectStore.createIndex("name", "name", { unique: false });
+
+                // Create an index to search customers by email.
+                objectStore.createIndex("email", "email", { unique: true });
+
+                // Use transaction oncomplete to make sure the objectStore creation is
+                // finished before adding data into it.
+                objectStore.transaction.oncomplete = (event) => {
+                    // Store values in the newly created objectStore.
+                    const customerObjectStore = db
+                                                .transaction("customers", "readwrite")
+                                                .objectStore("customers");
+                    customerData.forEach((customer) => {
+                        customerObjectStore.add(customer);
+                    });
+                };
+            }
+        };
+
+        // After saving, change version of the DB and refresh the table/database.
+        request.onsuccess = function(event) {
+            const db = event.target.result;
+            const transaction = db.transaction("customers", "readwrite");
+            const customer = transaction.objectStore("customers");
+            customer.add({ ssn: "888-77-7777", name: "Noa2", age: 22, email: "noa2@home.org" });
+        };
+    </script>
+</body>
+</html>
