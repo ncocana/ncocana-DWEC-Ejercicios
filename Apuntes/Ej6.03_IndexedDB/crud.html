@@ -1,0 +1,107 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD IndexedDB</title>
+</head>
+<body>
+    <input type="text" id="fruitName" name="name">
+    <button onclick="insertFruit()">Insertar fruta</button>
+    <button onclick="deleteFruit()">Borrar fruta</button>
+    <br>
+    <input type="text" id="fruitColor" name="color">
+    <button onclick="updateFruit()">Modificar color de la fruta</button>´
+    <br>
+    <button onclick="getFruits()">Mostrar frutas</button>
+    <button onclick="getFruitsGreen()">Mostrar frutas verdes</button>
+    <script>
+        const db = indexedDB.open('frutas', 1);
+
+        // Solo entra si la versión es superior a la que hay instalada en el navegador.
+        db.onupgradeneeded = function(ev) {
+            const database = ev.target.result;
+
+            const frutaObjStore = database.createObjectStore('Fruta', {keyPath: 'name'});
+
+            frutaObjStore.createIndex('Color', 'color', {unique: false});
+
+            frutaObjStore.add({
+                name: 'platano'
+            });
+            
+            frutaObjStore.add({
+                name: 'manzana',
+                color: 'verde'
+            });
+        }
+
+        function insertFruit() {
+            let fruitName = document.getElementById("fruitName").value;
+            let fruitColor = document.getElementById("fruitColor").value;
+
+            const transaction = db.result.transaction(['Fruta'], 'readwrite');
+
+            if (fruitColor) {
+                transaction.objectStore('Fruta').add({
+                    name: fruitName,
+                    color: fruitColor
+                });
+            } else {
+                transaction.objectStore('Fruta').add({
+                    name: fruitName
+                });
+            }
+        }
+
+        function deleteFruit() {
+            let fruitName = document.getElementById("fruitName").value;
+
+            const transaction = db.result.transaction(['Fruta'], 'readwrite');
+            transaction.objectStore('Fruta').delete(fruitName);
+        }
+
+        function updateFruit() {
+            let fruitName = document.getElementById("fruitName").value;
+            let fruitColor = document.getElementById("fruitColor").value;
+
+            const transaction = db.result.transaction(['Fruta'], 'readwrite');
+            transaction.objectStore('Fruta').put({
+                name: fruitName,
+                color: fruitColor
+            });
+        }
+
+        function getFruits() {
+            const transaction = db.result.transaction(['Fruta'], 'readonly');
+            
+            const getFruits = transaction.objectStore('Fruta').getAll();
+
+            getFruits.onsuccess = function(ev) {
+                const fruits = ev.target.result;
+
+                console.log(fruits);
+            }
+        }
+
+        function getFruitsGreen() {
+            const transaction = db.result.transaction(['Fruta'], 'readonly');
+            
+            const getFruitsGreen = transaction.objectStore('Fruta').index("Color");
+
+            // Returns all fruits green.
+            getFruitsGreen.getAll('verde').onsuccess = function(ev) {
+                const fruits = ev.target.result;
+
+                console.log(fruits);
+            }
+            
+            // Returns first fruit green.
+            // getFruitsGreen.get('verde').onsuccess = function(ev) {
+            //     const firstFruit = ev.target.result;
+
+            //     console.log(firstFruit);
+            // }
+        }
+    </script>
+</body>
+</html>
