@@ -2,7 +2,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Buscador de Ciudades</title>
+    <style>
+        span {
+            background-color: yellow;
+        }
+    </style>
 </head>
 <body>
     <input type="text" placeholder="City">
@@ -72,8 +77,17 @@
                     const table = document.getElementById("tabla");
                     citiesFiltered.forEach(city => {
                         const row = table.insertRow(0);
-                        row.insertCell(0).innerHTML = city.city;
-                        row.insertCell(1).innerHTML = city.country;
+                        const cell1 = row.insertCell(0);
+                        const cell2 = row.insertCell(1);
+
+                        // Highlight matching portion of the city name
+                        const startIndex = city.city.toUpperCase().indexOf(value.toUpperCase());
+                        const highlightedCity = city.city.substring(0, startIndex) +
+                            `<span>${city.city.substring(startIndex, startIndex + value.length)}</span>` +
+                            city.city.substring(startIndex + value.length);
+
+                        cell1.innerHTML = highlightedCity;
+                        cell2.innerHTML = city.country;
                     })
                 }
             }
