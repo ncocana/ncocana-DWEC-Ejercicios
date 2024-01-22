@@ -1,0 +1,12 @@
+:root {
+    --bg: red;
+}
+
+body {
+    background-color: var(--bg);
+}
+
+body div {
+    background: white;
+    color: var(--bg);
+}
