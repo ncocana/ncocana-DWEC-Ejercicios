@@ -10,7 +10,7 @@
     </style>
 </head>
 <body>
-    <input type="text" placeholder="City">
+    <input type="text" id="searcher" placeholder="City">
     <div id="result"></div>
 
     <script>
@@ -92,13 +92,29 @@
                 }
             }
 
+            window.onpopstate = function(event) {
+                if(event && event.state && event.state.query) {
+                    search(event.state.query);
+                    document.querySelector('#searcher').value = event.state.query;
+                }
+            }
+
             // SHOW CITIES
-            document.querySelector("input").addEventListener("input", function(event) {
+            document.querySelector("#searcher").addEventListener("input", function(event) {
+                const element = event.target;
                 const value = event.target.value;
                 // console.log(value);
 
                 if (value.length >= 3) {
                     search(value);
+
+                    history.pushState({ query: value }, "query "+value, "?query="+value);
+
+                    // Retrieve the value of the 'query' parameter from the URL
+                    // const urlParams = new URLSearchParams(window.location.search);
+                    // const queryValue = urlParams.get('query');
+
+                    // element.value = queryValue;
                 }
             });
         })()
