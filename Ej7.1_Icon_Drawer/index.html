@@ -8,7 +8,7 @@
 <body>
     <div id="app">
         <h1>Buscador de iconos</h1>
-        <input type="text" v-model="icon.name">
+        <input type="text" v-model="query">
         <button @click="sendForm">Enviar</button>
 
         <h2 v-if="icon.label">{{ icon.label }}</h2>

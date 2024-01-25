@@ -11,8 +11,9 @@ Vue.createApp({
     methods: {
         async sendForm() {
             // console.log(this.icon);
-            if (this.icon.name) {
-                let iconFetch = await fetch("http://34.90.153.139/ejercicios/icono.php?nombre=" + this.icon.name.toLowerCase());
+            if (this.query) {
+                this.icon = {};
+                let iconFetch = await fetch("http://34.90.153.139/ejercicios/icono.php?nombre=" + this.query.toLowerCase());
                 let iconJson = await iconFetch.json();
                 if (iconFetch.ok) {
                     this.icon = iconJson;
