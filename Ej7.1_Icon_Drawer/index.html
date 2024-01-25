@@ -15,6 +15,7 @@
         <svg v-if="icon.path" :width="icon.width" :height="icon.height">
             <path :d="icon.path" />
         </svg>
+        <p v-if="icon.status">Error {{ icon.status }}</p>
         <p v-if="icon.mensaje">{{ icon.mensaje }}</p>
     </div>
     <script src="./script.js"></script>
