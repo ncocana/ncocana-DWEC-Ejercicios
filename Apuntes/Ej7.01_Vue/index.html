@@ -1,0 +1,77 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .red{
+            color: red;
+        }
+
+        .blue{
+            color: blue;
+        }
+
+        .bold{
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="application">
+        {{ mensaje }}
+        <p v-if="usuario.name && usuario.surname">El usuario es {{ usuario.name }} {{usuario.surname}}</p>
+        <input type="text" v-model="mensaje">
+        <input type="text" v-model="usuario.name">
+        <input type="text" v-model="usuario.surname">
+        <input type="text" v-model="usuario.newAttribute">
+        <button @click="sendForm">Enviar formulario</button>
+        <p v-if="activeClass=='red'">La notificación 1 es: {{notificaciones[0]}}</p>
+        <p :class="'bold'" v-show="activeClass=='red'">La notificación 2 es: {{notificaciones[1]}}</p>
+        <p :class="activeClass + ' bold'">La notificación 3 es: {{notificaciones[2]}}</p>
+        <ul>
+            <li v-for="n in notificaciones">{{n}}</li>
+        </ul>
+        <button @click="changeMessage">Cambiar mensaje</button>
+        <button @click="changeColor">Cambiar solo el color</button>
+    </div>
+    <script>
+        Vue.createApp({
+            data(){
+                return {
+                    // Variables reactivas
+                    mensaje: "Hello Vue",
+                    usuario: {
+                        name: "Noa",
+                        surname: "Cocaña"
+                    },
+                    notificaciones: ['Hola', 'Adios', 'Whassup'],
+                    activeClass: 'red'
+                }
+            },
+            created(){
+                // Once created, do something.
+                // this.changeMessage();
+            },
+            methods: {
+                // changeMessage: function() {
+                //     this.mensaje = 'Goodbye Vue';
+                // },
+                changeMessage() {
+                    this.mensaje = 'Goodbye Vue';
+                    this.activeClass = 'blue';
+                    this.notificaciones.push("Nemuritai");
+                    this.notificaciones.push("Memento");
+                },
+                changeColor() {
+                    this.activeClass = 'blue';
+                },
+                sendForm() {
+                    console.log(this.usuario);
+                }
+            }
+        }).mount('#application');
+    </script>
+</body>
+</html>

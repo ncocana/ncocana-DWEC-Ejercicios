@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Usuarios MVC con Vue</title>
+        <meta charst="UTF-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <link rel="stylesheet" href="../css/styles.css">
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    </head>
+    <body>
+        <h1 class="center">Usuarios</h1>
+        <div id="app">
+            <button @click="sortUsers">Sort users</button>
+            <table class="center">
+                <tr>
+                    <th>ID User</th>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                </tr>
+                <tr v-for="user in users">
+                    <td>{{user.iduser}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.surname}}</td>
+                </tr>
+            </table>
+        </div>
+        <!-- <ul>
+            <li v-for="user in users">{{user.username}} - {{user.name}} {{user.surname}}</li>
+        </ul> -->
+    </body>
+    <script type="module">
+        import { getUsers } from "../controller/UserController.js";
+
+        // let usersData = await getUsers();
+
+        Vue.createApp({
+            data(){
+                return {
+                    // Variables reactivas
+                    users: [],
+                }
+            },
+            async created(){
+                this.users = await fetch(`http://34.90.153.139/ejercicios/usuarios.php`).then((r) => r.json());
+            },
+            methods: {
+                sortUsers(){
+                    this.users.sort((a, b) => a.surname.localeCompare(b.surname));
+                }
+            }
+        }).mount('#app');
+    </script>
+</html>
