@@ -1,0 +1,22 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon Drawer</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>Buscador de iconos</h1>
+        <input type="text" v-model="icon.name">
+        <button @click="sendForm">Enviar</button>
+
+        <h2 v-if="icon.label">{{ icon.label }}</h2>
+        <svg v-if="icon.path" :width="icon.width" :height="icon.height">
+            <path :d="icon.path" />
+        </svg>
+        <p v-if="icon.mensaje">{{ icon.mensaje }}</p>
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>
