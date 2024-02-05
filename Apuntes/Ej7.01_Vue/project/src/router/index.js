@@ -27,6 +27,11 @@ const routes = [
     path: '/borjamoll',
     name: 'borja moll',
     component: BorjaMoll
+  },
+  {
+    path: '/borjamoll/:id',
+    name: 'borja moll',
+    component: BorjaMoll
   }
 ]
 
