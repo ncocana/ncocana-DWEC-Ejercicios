@@ -31,21 +31,41 @@
 </template>
 
 <script>
+import { onMounted, ref } from "vue";
+
 export default {
-  name: 'AnimalList',
-  data () {
-    return {
-      animals: [],
+    name: 'AnimalList',
+    setup() {
+        const animals = ref([]);
+
+        async function listAnimals() {
+            const animalsFetch = await fetch("http://34.90.153.139/ejercicios/veterinario/getanimals.php");
+            animals.value = await animalsFetch.json();
+        };
+
+        onMounted(listAnimals);
+
+        return {
+            animals
+        }
     }
-  },
-  methods: {
-    async listAnimals() {
-      const animalsFetch = await fetch("http://34.90.153.139/ejercicios/veterinario/getanimals.php");
-      this.animals = await animalsFetch.json();
-    },
-  },
-  created() {
-    this.listAnimals();
-  },
 }
+
+// export default {
+//   name: 'AnimalList',
+//   data () {
+//     return {
+//       animals: [],
+//     }
+//   },
+//   methods: {
+//     async listAnimals() {
+//       const animalsFetch = await fetch("http://34.90.153.139/ejercicios/veterinario/getanimals.php");
+//       this.animals = await animalsFetch.json();
+//     },
+//   },
+//   created() {
+//     this.listAnimals();
+//   },
+// }
 </script>
