@@ -25,6 +25,7 @@
 
 <script>
 import { defineComponent } from 'vue'
+import { api } from 'boot/axios'
 
 export default defineComponent({
   name: 'IndexPage',
@@ -35,8 +36,16 @@ export default defineComponent({
   },
   methods: {
     async listAnimals() {
-      const animalsFetch = await fetch("http://34.90.153.139/ejercicios/veterinario/getanimals.php");
-      this.animals = await animalsFetch.json();
+        // Without Axios.
+        //  const animalsFetch = await fetch("http://34.90.153.139/ejercicios/veterinario/getanimals.php");
+        //  this.animals = await animalsFetch.json();
+
+        // Axios por defecto devuelve un json.
+        // const petition = await this.$axios.get("http://34.90.153.139/ejercicios/veterinario/getanimals.php");
+        // const petition = await this.$axios.get("http://34.90.153.139/ejercicios/veterinario/privada.php");
+        const petition = await api.get("getanimals.php");
+        // console.log(petition);
+        this.animals = petition.data;
     },
   },
   created() {
