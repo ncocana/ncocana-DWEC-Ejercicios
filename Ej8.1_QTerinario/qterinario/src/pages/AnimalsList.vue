@@ -25,6 +25,7 @@
 
 <script>
 import { defineComponent, onMounted, ref } from 'vue'
+import { api } from 'boot/axios'
 
 export default defineComponent({
     name: 'AnimalsList',
@@ -32,8 +33,8 @@ export default defineComponent({
         const animals = ref([]);
 
         async function listAnimals() {
-            const animalsFetch = await fetch("http://34.90.153.139/ejercicios/veterinario/getanimals.php");
-            animals.value = await animalsFetch.json();
+            const petition = await api.get("getanimals.php");
+            animals.value = petition.data;
         };
 
         onMounted(listAnimals);
