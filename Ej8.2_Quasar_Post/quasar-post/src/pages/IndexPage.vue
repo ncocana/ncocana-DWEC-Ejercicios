@@ -16,7 +16,7 @@ import moment from 'moment';
 export default defineComponent({
     name: 'IndexPage',
     setup () {
-        const $q = useQuasar();
+        // const $q = useQuasar();
         const textTitle = ref('');
         const textUrl = ref('');
         const dense = ref(false);
@@ -41,23 +41,7 @@ export default defineComponent({
             // console.log(entry);
 
             // Make API call to save the entry
-            api.post('/save.php', entry, config)
-                .then((response) => {
-                        $q.notify({
-                        color: 'positive',
-                        position: 'top',
-                        message: response.data.message,
-                        icon: 'report_problem'
-                    })
-                })
-                .catch((error) => {
-                    $q.notify({
-                        color: 'negative',
-                        position: 'top',
-                        message: error.response.statusText + ": " + error.response.data.error,
-                        icon: 'report_problem'
-                    })
-                });
+            api.post('/save.php', entry, config);
         }
 
         return {

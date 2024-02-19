@@ -1,5 +1,6 @@
 import { boot } from 'quasar/wrappers'
 import axios from 'axios'
+import { Notify } from 'quasar'
 
 // Be careful when using SSR for cross-request state pollution
 // due to creating a Singleton instance here;
@@ -20,5 +21,33 @@ export default boot(({ app }) => {
   // ^ ^ ^ this will allow you to use this.$api (for Vue Options API form)
   //       so you can easily perform requests against your app's API
 })
+
+api.interceptors.response.use(function (response) {
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    // config.withCredentials = true;
+    // config.headers.Authorization = 'token';
+    Notify.create({
+        type: 'positive',
+        message: response.data.message
+    })
+    return response;
+}, function (error) {
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    if (error && error.response && error.response.status === 400) {
+        Notify.create({
+            type: 'negative',
+            message: error.response.statusText + ": " + error.response.data.error
+        })
+    } else {
+        Notify.create({
+            type: 'negative',
+            message: 'Unknown error'
+        })
+    }
+    console.log(error);
+    return Promise.reject(error);
+});
 
 export { api }
